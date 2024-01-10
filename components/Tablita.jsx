@@ -12,13 +12,22 @@ const table = async ({ lista }) => {
             `https://api.mobula.io/api/1/market/multi-data?symbols=${string}`,
             {
                 cache: "no-store",
+                method: "GET",
+                headers: {
+                    authorization: process.env.MOBULA_API_KEY,
+                },
             }
         );
         itemFound = await res.json();
+        // console.log(`la respuesta de ${lista} es ${itemFound.data}`);
+        // console.log("la data es");
+        // console.log(itemFound);
         for (const property in itemFound.data) {
             const data = { ...itemFound.data[property], name: property };
             arreglo.push(data);
         }
+        // console.log("pasado a arreglo queda");
+        // console.log(arreglo);
     } catch (error) {
         console.log(error);
     }
@@ -38,7 +47,10 @@ const table = async ({ lista }) => {
                         </th>
                         <th className="border px-4 py-2 text-white">Precio</th>
                         <th className="border px-4 py-2 text-white">
-                            Decrease from all Time High
+                            El precio actual es el % del ath
+                        </th>
+                        <th className="border px-4 py-2 text-white">
+                            El precio actual subio tantas veces desde el atl
                         </th>
                         <th className="border px-4 py-2 text-white">Ranking</th>
                     </tr>
@@ -55,16 +67,29 @@ const table = async ({ lista }) => {
                                         {item.name}
                                     </td>
                                     <td className="border px-4 py-2 font-medium">
-                                        {item.atl}
+                                        {Number(item.atl).toFixed(5)}
                                     </td>
                                     <td className="border px-4 py-2 font-medium">
-                                        {item.ath}
+                                        {Number(item.ath).toFixed(5)}
                                     </td>
                                     <td className="border px-4 py-2 font-medium">
-                                        {item.price}
+                                        {Number(item.price).toFixed(5)}
                                     </td>
                                     <td className="border px-4 py-2 font-medium">
-                                        completar
+                                        {(
+                                            (Number(item.price) /
+                                                Number(item.ath)) *
+                                            100
+                                        ).toFixed(2)}
+                                        %
+                                    </td>
+                                    <td className="border px-4 py-2 font-medium">
+                                        {(
+                                            (Number(item.price) /
+                                                Number(item.atl)) *
+                                            100
+                                        ).toFixed(2)}
+                                        %
                                     </td>
                                     <td className="border px-4 py-2 font-medium">
                                         {item.rank}
