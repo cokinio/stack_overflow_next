@@ -23,7 +23,17 @@ const table = async ({ lista }) => {
         // console.log("la data es");
         // console.log(itemFound);
         for (const property in itemFound.data) {
-            const data = { ...itemFound.data[property], name: property };
+            const data = {
+                ...itemFound.data[property],
+                name: property,
+                desdeAth:
+                    Number(itemFound.data[property].price) /
+                    Number(itemFound.data[property].ath),
+                desdeAtl:
+                    Number(itemFound.data[property].price) /
+                    Number(itemFound.data[property].atl),
+            };
+
             arreglo.push(data);
         }
         // console.log("pasado a arreglo queda");
@@ -75,21 +85,18 @@ const table = async ({ lista }) => {
                                     <td className="border px-4 py-2 font-medium">
                                         {Number(item.price).toFixed(5)}
                                     </td>
-                                    <td className="border px-4 py-2 font-medium">
-                                        {(
-                                            (Number(item.price) /
-                                                Number(item.ath)) *
-                                            100
-                                        ).toFixed(2)}
-                                        %
+                                    <td
+                                        className={
+                                            "border px-4 py-2 font-medium" +
+                                            (item.desdeAth < 0.2
+                                                ? "bg-green-600"
+                                                : "bg-red-600")
+                                        }
+                                    >
+                                        {Number(item.desdeAth).toFixed(2)}
                                     </td>
-                                    <td className="border px-4 py-2 font-medium">
-                                        {(
-                                            (Number(item.price) /
-                                                Number(item.atl)) *
-                                            100
-                                        ).toFixed(2)}
-                                        %
+                                    <td className="border bg-green-600 px-4 py-2 font-medium">
+                                        {Number(item.desdeAtl).toFixed(2)}
                                     </td>
                                     <td className="border px-4 py-2 font-medium">
                                         {item.rank}
