@@ -37,7 +37,7 @@ const table = async ({ lista }) => {
             arreglo.push(data);
         }
         // console.log("pasado a arreglo queda");
-        // console.log(arreglo);
+        console.log(arreglo);
     } catch (error) {
         console.log(error);
     }
