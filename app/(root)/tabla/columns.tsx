@@ -41,6 +41,48 @@ export const columns: ColumnDef<Data>[] = [
         header: "Nombre",
     },
     {
+        accessorKey: "price",
+        header: () => <div className="text-right">Precio</div>,
+        cell: ({ row }) => {
+            const amount = parseFloat(row.getValue("price"));
+            const formatted = new Intl.NumberFormat("en-US", {
+                style: "currency",
+                currency: "USD",
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 8,
+                // minimumSignificantDigits: 3,
+            }).format(amount);
+            return <div className="text-right font-medium">{formatted}</div>;
+        },
+    },
+    {
+        accessorKey: "market_cap",
+        header: ({ column }) => {
+            return (
+                <Button
+                    variant="ghost"
+                    onClick={() =>
+                        column.toggleSorting(column.getIsSorted() === "asc")
+                    }
+                >
+                    Market Cap
+                    <ArrowUpDown className="ml-2 h-4 w-4" />
+                </Button>
+            );
+        },
+        cell: ({ row }) => {
+            const amount = parseFloat(row.getValue("market_cap"));
+            const formatted = new Intl.NumberFormat("en-US", {
+                style: "currency",
+                currency: "USD",
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 8,
+                // minimumSignificantDigits: 3,
+            }).format(amount);
+            return <div className="text-right font-medium">{formatted}</div>;
+        }
+    },
+    {
         accessorKey: "atl",
         header: () => <div className="text-right">Minimo Historico</div>,
         cell: ({ row }) => {
@@ -66,21 +108,7 @@ export const columns: ColumnDef<Data>[] = [
             return <div className="text-right font-medium">{formatted}</div>;
         },
     },
-    {
-        accessorKey: "price",
-        header: () => <div className="text-right">Precio</div>,
-        cell: ({ row }) => {
-            const amount = parseFloat(row.getValue("price"));
-            const formatted = new Intl.NumberFormat("en-US", {
-                style: "currency",
-                currency: "USD",
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 8,
-                // minimumSignificantDigits: 3,
-            }).format(amount);
-            return <div className="text-right font-medium">{formatted}</div>;
-        },
-    },
+    
     {
         accessorKey: "desdeAth",
         header: ({ column }) => {
