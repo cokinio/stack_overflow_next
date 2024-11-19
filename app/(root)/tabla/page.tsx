@@ -121,15 +121,16 @@ const page = async () => {
         "rose",
         "frm",
         "matic",
-        "ada",
         "inj",
-        "uni"]
+        "uni","ada","xrp","ltc"]
 
+    const listaBanter=["sol", "stx", "link", "strd", "astro","aevo","pendle","rune","rndr", "fil", "super", "crown", "imx","sfund","rlb","redo","ar","blur"]
     const data20 = await getData(list20x);
     const data50 = await getData(list50x);
     const data100 = await getData(list100x);
     const data1000 = await getData(list1000x);
     const dataListaNueva=await getData(listaNueva);
+    const dataBanter=await getData(listaBanter);
 
     return (
         <div>
@@ -153,6 +154,8 @@ const page = async () => {
             <DataTable columns={columns} data={data1000} />
             <h2 className="my-5">Lista nueva</h2>
             <DataTable columns={columns} data={dataListaNueva} />
+            <h2 className="my-5">Lista Banter</h2>
+            <DataTable columns={columns} data={dataBanter} />
         </div>
     );
 };
