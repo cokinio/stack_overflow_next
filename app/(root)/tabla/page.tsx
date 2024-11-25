@@ -124,6 +124,13 @@ const page = async () => {
         "inj",
         "uni","ada","xrp","ltc"]
 
+    const top100=["BTC","ETH","USDT","SOL","BNB","XRP","DOGE","USDC","ADA","AVAX","TRX","TON","XLM","SHIB","WBTC","DOT","LINK","BCH","SUI",
+    "PEPE","NEAR","LEO","UNI","LTC","APT","ADVB","WEETH","WBETH","ICP","HBAR","DAI","USDS","CRO","ETC","POL",
+    "RENDER","ARB","KAS","USDE","TAO","FET","TIA","BONK","VET","FIL","WIF","OM","STX","ATOM","OKB","RNDR",
+    "XMR","OP","MNT","IMX","INJ","AAVE","FTM","SEI","GRT","BGB","ALGO","FLOKI","FDUSD","THETA","RUNE","ENA",
+    "SAND","RAY","WLD","MKR","BRETT","PYTH","LDO","JUP","ONDO","AR","FLOW","KCS","BSV","POPCAT","MATIC","GALA",
+    "XTZ","STRK","MSOL","BTT","MANA","EOS","JASMY","FLR","AXS","QNT","PNUT","BEAMX","BEAM","KAIA","FLZ","HNT","NEO"]
+
     const listaBanter=["sol", "stx", "link", "strd", "astro","aevo","pendle","rune","rndr", "fil", "super", "crown", "imx","sfund","rlb","redo","ar","blur"]
     const data20 = await getData(list20x);
     const data50 = await getData(list50x);
@@ -131,6 +138,7 @@ const page = async () => {
     const data1000 = await getData(list1000x);
     const dataListaNueva=await getData(listaNueva);
     const dataBanter=await getData(listaBanter);
+    const dataTop100=await getData(top100);
 
     return (
         <div>
@@ -156,6 +164,8 @@ const page = async () => {
             <DataTable columns={columns} data={dataListaNueva} />
             <h2 className="my-5">Lista Banter</h2>
             <DataTable columns={columns} data={dataBanter} />
+            <h2 className="my-5">top 100</h2>
+            <DataTable columns={columns} data={dataTop100} />
         </div>
     );
 };
